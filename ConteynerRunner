@@ -1,0 +1,28 @@
+public class ConteynerRunner {
+    public static void main(String args[]){
+    String s="Hello";
+    int i=5;
+    String s1="h";
+    char c='b';
+
+    BlackList blackList=new BlackList();
+    Conteyner conteyner=new Conteyner(blackList);
+
+    try {
+        blackList.addToBlackList(String.class);
+        conteyner.addObject(s);
+        conteyner.addObject(i);
+        conteyner.addObject(c);
+        conteyner.getAndRemoveObject();
+
+    }catch (NullPointerException e){
+        e.printStackTrace();
+    }
+        System.out.println(blackList.toString());
+
+        System.out.println(conteyner.getObject());
+        System.out.println(conteyner);
+
+
+    }
+}
