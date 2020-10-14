@@ -1,0 +1,45 @@
+import java.util.Arrays;
+
+public class BlackList {
+    private Class[] blackList=new Class[0];
+
+    public BlackList() {
+    }
+
+    public Class[] getBlackList() {
+        return blackList;
+    }
+
+    public void addToBlackList(Class clas) throws NullPointerException{
+        if (!isBlackList(clas)){
+        if (clas!=null) {
+            increaseBlackArr();
+            for (int i = 0; i < blackList.length; i++) {
+                if (blackList[i] == null) {
+                    blackList[i] = clas;
+                    return;
+                }
+            }
+        }else System.out.println("Class-"+clas+" exist in black list");
+        }else throw new NullPointerException("Null");
+    }
+    public Boolean isBlackList(Class clas) throws NullPointerException {
+        for (Class i:blackList) {
+               if(i.equals(clas))
+                return true;
+        } return false;
+    }
+
+
+    public void increaseBlackArr(){
+        Class[] classArray= Arrays.copyOf(blackList,blackList.length+1);
+        this.blackList=Arrays.copyOf(classArray,classArray.length);
+    }
+
+    @Override
+    public String toString() {
+        return "BlackList{" +
+                "blackList=" + Arrays.toString(blackList) +
+                '}';
+    }
+}
