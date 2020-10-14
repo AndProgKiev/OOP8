@@ -1,0 +1,60 @@
+import java.util.Arrays;
+
+public class Conteyner {
+    private Object [] objectsList =new Object[0];
+    private BlackList blackList;
+
+    public Conteyner(BlackList blackList) {
+        this.blackList = blackList;
+    }
+
+    public Conteyner() {
+    }
+
+    public Object[] getObjectsList() {
+        return objectsList;
+    }
+
+    public BlackList getBlackList() {
+        return blackList;
+    }
+
+    public void addObject(Object object) throws NullPointerException{
+
+        if (object!=null&&!blackList.isBlackList(object.getClass())){
+            increaseArr();
+            for (int i = 0; i < objectsList.length ; i++) {
+                if (objectsList[i]==null){
+                    objectsList[i]=object;
+                    return;
+                }
+            }
+        }
+    }
+    public Object getAndRemoveObject(){
+        Object newObject=objectsList[objectsList.length-1];
+
+        Object [] objects=Arrays.copyOfRange(objectsList,0,objectsList.length-1);
+        objectsList=Arrays.copyOf(objects,objects.length);
+
+        return  newObject;
+    }
+
+
+    public Object getObject()throws RuntimeException{
+    Object newObject=objectsList[objectsList.length-1];
+        return newObject;
+    }
+
+    public void increaseArr(){
+        Object[] newObject=Arrays.copyOf(objectsList,objectsList.length+1);
+        this.objectsList=Arrays.copyOf(newObject,newObject.length);
+    }
+
+    @Override
+    public String toString() {
+        return "Conteyner{" +
+                "objectsList=" + Arrays.toString(objectsList) +
+                '}';
+    }
+}
